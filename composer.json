@@ -15,13 +15,14 @@
         }
     },
     "require": {
+        "php": ">=7.0",
         "illuminate/support": "^5.4",
         "monolog/monolog": "~1.11",
         "orchestra/support-core": "^3.4"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
-        "phpunit/phpunit": "~4.8.35 || ~5.7 || ~6.0"
+        "phpunit/phpunit": "~5.7 || ~6.0"
     },
     "extra": {
         "branch-alias": {
