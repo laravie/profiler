@@ -79,7 +79,21 @@ class Timer
      */
     public function endIf($condition)
     {
-        if ($condition !== true) {
+        if (!! $condition) {
+            $this->end();
+        }
+    }
+
+    /**
+     * End the timer unless condition is matched.
+     *
+     * @param  bool  $condition
+     *
+     * @return void
+     */
+    public function endUnless($condition)
+    {
+        if (! $condition) {
             $this->end();
         }
     }
