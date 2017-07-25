@@ -7,9 +7,9 @@ interface Profiler extends Timing
     /**
      * Extend the profiler.
      *
-     * @param  callable  $callback
+     * @param  \Laravie\Profiler\Contracts\Listener  $listener
      *
      * @return $this
      */
-    public function extend(callable $callback);
+    public function extend(Listener $listener);
 }
