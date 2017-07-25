@@ -3,9 +3,8 @@
 namespace Laravie\Profiler;
 
 use Monolog\Logger;
-use Laravie\Profiler\Contracts\Profiler as ProfilerContract;
 
-class Profiler implements ProfilerContract
+class Profiler implements Contracts\Profiler
 {
     use Traits\Logger,
         Traits\Timing;
@@ -23,13 +22,13 @@ class Profiler implements ProfilerContract
     /**
      * Extend the profiler.
      *
-     * @param  callable  $callback
+     * @param  \Laravie\Profiler\Contracts\Listener  $callback
      *
      * @return $this
      */
-    public function extend(callable $callback)
+    public function extend(Contracts\Listener $listener)
     {
-        call_user_func($callback, $this->getMonolog());
+        $listener->handle($this->getMonolog());
 
         return $this;
     }

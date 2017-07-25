@@ -3,7 +3,6 @@
 namespace Laravie\Profiler;
 
 use Illuminate\Support\ServiceProvider;
-use Laravie\Profiler\Contracts\Profiler as ProfilerContract;
 
 class ProfilerServiceProvider extends ServiceProvider
 {
@@ -21,7 +20,7 @@ class ProfilerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ProfilerContract::class, function ($app) {
+        $this->app->singleton(Contracts\Profiler::class, function ($app) {
             return new Profiler($app->make('log')->getMonolog());
         });
     }
@@ -34,7 +33,7 @@ class ProfilerServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            ProfilerContract::class,
+            Contracts\Profiler::class,
         ];
     }
 }

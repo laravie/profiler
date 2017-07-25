@@ -146,4 +146,14 @@ class Timer
 
         return ($endedAt - $this->startedAt);
     }
+
+    /**
+     * Return Timer name as string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name();
+    }
 }

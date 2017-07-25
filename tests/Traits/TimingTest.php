@@ -3,6 +3,7 @@
 namespace Laravie\Profiler\TestCase\Traits;
 
 use Mockery as m;
+use Laravie\Profiler\Timer;
 use PHPUnit\Framework\TestCase;
 use Laravie\Profiler\Traits\Timing;
 
@@ -26,12 +27,19 @@ class TimingTest extends TestCase
         $this->timers = [];
         $this->monolog = $monolog = m::mock('\Monolog\Logger');
 
-        $monolog->shouldReceive('addInfo')->once()->with(m::type('String'));
+        $monolog->shouldReceive('addInfo')->twice()->with(m::type('String'));
 
-        $this->assertEquals('foo', $this->time('foo'));
-        $this->assertNull($this->timeEnd('foo'));
+        $timer1 = $this->time('foo');
+        $timer2 = $this->time('foo');
 
-        $this->assertNotEquals('foo', $this->time('foo'));
+        $this->assertEquals('foo', $timer1);
+        $this->assertInstanceOf(Timer::class, $timer1);
+
+        $this->assertInstanceOf(Timer::class, $timer2);
+        $this->assertSame($timer1->name(), $timer2->name());
+
+        $this->assertNUll($timer1->end());
+        $this->assertNUll($this->timeEnd($timer2));
     }
 
     /**
@@ -42,8 +50,12 @@ class TimingTest extends TestCase
         $this->timers = [];
         $this->monolog = $monolog = m::mock('\Monolog\Logger');
 
-        $this->assertEquals('foobar', $this->time('foobar'));
-        $this->assertNotEquals('foobar', $this->time('foobar'));
+        $timer1 = $this->time('foobar');
+        $timer2 = $this->time('foobar');
+
+        $this->assertSame('foobar', $timer1->name());
+        $this->assertSame('foobar', $timer2->name());
+        $this->assertNotSame($timer1, $timer2);
     }
 
     /**
