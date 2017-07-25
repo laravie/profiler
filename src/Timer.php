@@ -65,7 +65,8 @@ class Timer
             call_user_func($callback, [
                 'name' => $this->name,
                 'message' => $this->message(),
-                'seconds' => $this->lapse(),
+                'startedAt' => $this->startedAt,
+                'lapse' => $this->lapse(),
             ]);
         }
     }
@@ -105,9 +106,13 @@ class Timer
      */
     public function message()
     {
-        $message = $this->message ?: '{name} took {seconds} seconds.';
+        $message = $this->message ?: '{name} took {lapse} seconds.';
 
-        return Str::replace($message, ['name' => $this->name, 'seconds' => $this->lapse()]);
+        return Str::replace($message, [
+            'name' => $this->name,
+            'started' => $this->startedAt,
+            'lapse' => $this->lapse(),
+        ]);
     }
 
     /**
