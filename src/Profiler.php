@@ -2,6 +2,7 @@
 
 namespace Laravie\Profiler;
 
+use Monolog\Logger;
 use Laravie\Profiler\Contracts\Profiler as ProfilerContract;
 
 class Profiler implements ProfilerContract
