@@ -19,7 +19,7 @@ trait Timing
      * @param  string       $name
      * @param  string|null  $message
      *
-     * @return string
+     * @return \Laravie\Profiler\Timer
      */
     public function time($name, $message = null)
     {
@@ -28,7 +28,7 @@ trait Timing
         $this->timers[$id] = (new Timer($name, microtime(true), $message))
                                     ->setMonolog($this->getMonolog());
 
-        return $id;
+        return $this->timers[$id];
     }
 
     /**
