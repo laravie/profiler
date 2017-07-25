@@ -2,7 +2,6 @@
 
 namespace Laravie\Profiler;
 
-use Closure;
 use Laravie\Profiler\Traits\Logger;
 use Laravie\Profiler\Traits\Timing;
 use Laravie\Profiler\Contracts\Profiler as ProfilerContract;

@@ -2,7 +2,7 @@
 
 namespace Laravie\Profiler\Traits;
 
-use Orchestra\Support\Str;
+use Laravie\Profiler\Timer;
 
 trait Timing
 {
@@ -25,11 +25,7 @@ trait Timing
     {
         $id = isset($this->timers[$name]) ? uniqid($name) : $name;
 
-        $this->timers[$id] = [
-            'name'    => $name,
-            'start'   => microtime(true),
-            'message' => $message,
-        ];
+        $this->timers[$id] = new Timer($name, microtime(true), $message);
 
         return $id;
     }
@@ -37,31 +33,26 @@ trait Timing
     /**
      * Calculate timed taken for a process to complete.
      *
-     * @param  string|null  $name
+     * @param  \Laravie\Profiler\Timer|string|null  $name
      *
      * @return void
      */
     public function timeEnd($name = null)
     {
-        $id  = $name;
-        $end = microtime(true);
+        $timer = $name instanceof Timer ? $name : $this->resolveTimerFromName($name);
 
-        is_null($id) && $id = uniqid();
+        $this->getMonolog()->addInfo($timer->message());
+    }
 
-        if (! isset($this->timers[$id])) {
-            $this->timers[$id] = [
-                'name'    => $name,
-                'start'   => constant('LARAVEL_START'),
-                'message' => null,
-            ];
+    protected function resolveTimerFromName($name = null)
+    {
+        $id = is_null($name) ? uniqid() : $name;
+
+        if (isset($this->timers[$id])) {
+            return $this->timers[$id];
         }
 
-        $message = $this->timers[$id]['message'] ?: '{name} took {sec} seconds.';
-        $name    = $this->timers[$id]['name'];
-        $seconds = $end - $this->timers[$id]['start'];
-
-        $this->getMonolog()
-            ->addInfo(Str::replace($message, ['name' => $name, 'sec' => $seconds]));
+        return new Timer($name, constant('LARAVEL_START'));
     }
 
     /**
