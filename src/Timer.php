@@ -64,6 +64,7 @@ class Timer
      * End the timer if condition is matched.
      *
      * @param  bool  $condition
+     *
      * @return void
      */
     public function endIf($condition)
