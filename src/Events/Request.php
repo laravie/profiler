@@ -3,8 +3,8 @@
 namespace Laravie\Profiler\Events;
 
 use Monolog\Logger;
-use Illuminate\Http\Request;
 use Laravie\Profiler\Contracts\Listener;
+use Illuminate\Http\Request as HttpRequest;
 
 class Request implements Listener
 {
@@ -26,7 +26,7 @@ class Request implements Listener
      */
     protected function getCurrentRoute()
     {
-        $request = app(Request::class);
+        $request = app(HttpRequest::class);
         $method  = strtoupper($request->getMethod());
         $path    = ltrim($request->path(), '/');
         $host    = $request->getHost();

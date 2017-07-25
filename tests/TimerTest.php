@@ -24,10 +24,8 @@ class TimerTest extends TestCase
      /** @test */
     function timer_can_output_to_monolog()
     {
-        $logger = m::mock(LoggerInterface::class);
+        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
         $monolog = m::mock(Logger::class);
-
-        $this->app->instance('log', $logger);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
         $monolog->shouldReceive('addInfo')->once()->with('Hello world');
@@ -51,10 +49,8 @@ class TimerTest extends TestCase
     /** @test */
     function timer_can_be_ended_without_start()
     {
-        $logger = m::mock(LoggerInterface::class);
+        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
         $monolog = m::mock(Logger::class);
-
-        $this->app->instance('log', $logger);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
         $monolog->shouldReceive('addInfo')->once()->with(m::type('String'));
@@ -69,10 +65,8 @@ class TimerTest extends TestCase
     /** @test */
     function timer_can_be_ended_using_name()
     {
-        $logger = m::mock(LoggerInterface::class);
+        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
         $monolog = m::mock(Logger::class);
-
-        $this->app->instance('log', $logger);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
         $monolog->shouldReceive('addInfo')->once()->with('Goodbye world');

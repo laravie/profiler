@@ -18,10 +18,8 @@ class DatabaseQueryTest extends TestCase
     /** @test */
     function query_should_be_logged()
     {
-        $logger = m::mock(LoggerInterface::class);
+        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
         $monolog = m::mock(Logger::class);
-
-        $this->app->instance('log', $logger);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
 
@@ -38,15 +36,13 @@ class DatabaseQueryTest extends TestCase
     /** @test */
     function accepts_query_executed_event()
     {
-        $logger = m::mock(LoggerInterface::class);
+        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
         $monolog = m::mock(Logger::class);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
         $monolog->shouldReceive('addInfo')->once()->with('<comment>SELECT * FROM `foo` WHERE id=1 [1ms]</comment>')
             ->shouldReceive('addInfo')->once()->with('<comment>SELECT * FROM `users` WHERE id=10 [3ms]</comment>')
             ->shouldReceive('addInfo')->with(m::type('String'));
-
-        $this->app->instance('log', $logger);
 
         $db = app('db');
         $profiler = app(Profiler::class);
