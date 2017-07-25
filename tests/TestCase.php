@@ -2,11 +2,25 @@
 
 namespace Laravie\Profiler\TestCase;
 
-use Laravie\Profiler\ProfilerServiceProvider;
 use Orchestra\Testbench\TestCase as Testbench;
 
 abstract class TestCase extends Testbench
 {
+    /**
+     * Setup the test environment.
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->withFactories(__DIR__.'/factories');
+
+        $this->loadMigrationsFrom([
+            '--database' => 'testing',
+            '--realpath' => realpath(__DIR__.'/migrations'),
+        ]);
+    }
+
     /**
      * Get package providers.
      *
@@ -17,7 +31,8 @@ abstract class TestCase extends Testbench
     protected function getPackageProviders($app)
     {
         return [
-            ProfilerServiceProvider::class,
+            \Laravie\Profiler\ProfilerServiceProvider::class,
+            \Orchestra\Database\ConsoleServiceProvider::class,
         ];
     }
 }
