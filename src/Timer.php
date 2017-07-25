@@ -53,11 +53,21 @@ class Timer
     /**
      * End the timer.
      *
+     * @param  callable|null  $callback
+     *
      * @return void
      */
-    public function end()
+    public function end(callable $callback = null)
     {
         $this->getMonolog()->addInfo($this->message());
+
+        if (is_callable($callback)) {
+            call_user_func($callback, [
+                'name' => $this->name,
+                'message' => $this->message(),
+                'seconds' => $this->lapse(),
+            ]);
+        }
     }
 
     /**
@@ -83,7 +93,7 @@ class Timer
     {
         $message = $this->message ?: '{name} took {seconds} seconds.';
 
-        return Str::replace($message, ['name' => $this->name(), 'seconds' => $this->seconds()]);
+        return Str::replace($message, ['name' => $this->name, 'seconds' => $this->lapse()]);
     }
 
     /**
@@ -97,11 +107,21 @@ class Timer
     }
 
     /**
+     * Get started at.
+     *
+     * @return int
+     */
+    public function startedAt()
+    {
+        return $this->startedAt;
+    }
+
+    /**
      * Get seconds.
      *
      * @return int
      */
-    public function seconds()
+    public function lapse()
     {
         $endedAt = microtime(true);
 
