@@ -2,13 +2,12 @@
 
 namespace Laravie\Profiler;
 
-use Laravie\Profiler\Traits\Logger;
-use Laravie\Profiler\Traits\Timing;
 use Laravie\Profiler\Contracts\Profiler as ProfilerContract;
 
 class Profiler implements ProfilerContract
 {
-    use Logger, Timing;
+    use Traits\Logger,
+        Traits\Timing;
 
     /**
      * Setup a new profiler.

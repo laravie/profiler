@@ -40,6 +40,7 @@ class TimingTest extends TestCase
     public function testTimerNameCannotBeUsedTwice()
     {
         $this->timers = [];
+        $this->monolog = $monolog = m::mock('\Monolog\Logger');
 
         $this->assertEquals('foobar', $this->time('foobar'));
         $this->assertNotEquals('foobar', $this->time('foobar'));

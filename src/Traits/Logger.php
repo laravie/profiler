@@ -2,7 +2,7 @@
 
 namespace Laravie\Profiler\Traits;
 
-use Monolog\Logger;
+use Monolog\Logger as Monolog;
 
 trait Logger
 {
@@ -30,7 +30,7 @@ trait Logger
      *
      * @return $this
      */
-    public function setMonolog(Logger $monolog)
+    public function setMonolog(Monolog $monolog)
     {
         $this->monolog = $monolog;
 

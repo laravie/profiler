@@ -25,7 +25,8 @@ trait Timing
     {
         $id = isset($this->timers[$name]) ? uniqid($name) : $name;
 
-        $this->timers[$id] = new Timer($name, microtime(true), $message);
+        $this->timers[$id] = (new Timer($name, microtime(true), $message))
+                                    ->setMonolog($this->getMonolog());
 
         return $id;
     }
@@ -41,7 +42,7 @@ trait Timing
     {
         $timer = $name instanceof Timer ? $name : $this->resolveTimerFromName($name);
 
-        $this->getMonolog()->addInfo($timer->message());
+        $timer->end();
     }
 
     protected function resolveTimerFromName($name = null)
@@ -52,7 +53,8 @@ trait Timing
             return $this->timers[$id];
         }
 
-        return new Timer($name, constant('LARAVEL_START'));
+        return (new Timer($name, constant('LARAVEL_START')))
+                    ->setMonolog($this->getMonolog());
     }
 
     /**

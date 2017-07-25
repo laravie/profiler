@@ -6,6 +6,8 @@ use Orchestra\Support\Str;
 
 class Timer
 {
+    use Traits\Logger;
+
     /**
      * Timer unique name.
      *
@@ -49,6 +51,16 @@ class Timer
     }
 
     /**
+     * End the timer.
+     *
+     * @return void
+     */
+    public function end()
+    {
+        $this->getMonolog()->addInfo($this->message());
+    }
+
+    /**
      * Get message.
      *
      * @return string
@@ -77,8 +89,8 @@ class Timer
      */
     public function seconds()
     {
-        $end = microtime(true);
+        $endedAt = microtime(true);
 
-        return ($end - $this->start);
+        return ($endedAt - $this->startedAt);
     }
 }
