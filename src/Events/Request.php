@@ -12,6 +12,7 @@ class Request implements Listener
      * Handle the listener.
      *
      * @param  \Monolog\Logger  $monolog
+     *
      * @return void
      */
     public function handle(Logger $monolog)
@@ -19,7 +20,7 @@ class Request implements Listener
         $monolog->addInfo('<info>Request: '.$this->getCurrentRoute().'</info>');
     }
 
-        /**
+    /**
      * Get current route.
      *
      * @return string
@@ -27,9 +28,9 @@ class Request implements Listener
     protected function getCurrentRoute()
     {
         $request = app(HttpRequest::class);
-        $method  = strtoupper($request->getMethod());
-        $path    = ltrim($request->path(), '/');
-        $host    = $request->getHost();
+        $method = strtoupper($request->getMethod());
+        $path = ltrim($request->path(), '/');
+        $host = $request->getHost();
 
         ! is_null($host) && $host = rtrim($host, '/');
 

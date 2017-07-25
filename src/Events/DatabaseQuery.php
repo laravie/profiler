@@ -14,6 +14,7 @@ class DatabaseQuery implements Listener
      * Handle the listener.
      *
      * @param  \Monolog\Logger  $monolog
+     *
      * @return void
      */
     public function handle(Logger $monolog)
@@ -33,6 +34,7 @@ class DatabaseQuery implements Listener
      * BUild Query Callback.
      *
      * @param  \Monolog\Logger  $monolog
+     *
      * @return \Closure
      */
     protected function buildQueryCallback(Logger $monolog)
