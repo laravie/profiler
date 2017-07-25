@@ -45,6 +45,13 @@ trait Timing
         $timer->end();
     }
 
+    /**
+     * Resolve timer from name.
+     *
+     * @param  string|null $name
+     *
+     * @return \Laravie\Profiler\Timer
+     */
     protected function resolveTimerFromName($name = null)
     {
         $id = is_null($name) ? uniqid() : $name;
