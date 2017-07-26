@@ -1,10 +1,10 @@
 language: php
-
 sudo: false
 
 php:
   - 7.0
   - 7.1
+  - 7.2
 
 env:
   global:
@@ -26,11 +26,9 @@ script:
 matrix:
   include:
     - php: 7.0
-      env:
-        - setup=lowest
-        - laravel=5.4.*
+      env: setup=lowest laravel=5.4.*
     - php: 7.0
-      env:
-        - setup=stable
-        - laravel=5.4.*
+      env: setup=stable laravel=5.4.*
+  allow_failures:
+    - php: 7.2
   fast_finish: true
