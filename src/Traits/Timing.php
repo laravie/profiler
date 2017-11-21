@@ -3,6 +3,8 @@
 namespace Laravie\Profiler\Traits;
 
 use Laravie\Profiler\Timer;
+use Monolog\Logger as Monolog;
+use Laravie\Profiler\Contracts\Timer as TimerContract;
 
 trait Timing
 {
@@ -21,7 +23,7 @@ trait Timing
      *
      * @return \Laravie\Profiler\Timer
      */
-    public function time($name, $message = null)
+    public function time(string $name, string $message = null): TimerContract
     {
         $id = isset($this->timers[$name]) ? uniqid($name) : $name;
 
@@ -40,7 +42,7 @@ trait Timing
      */
     public function timeEnd($name = null)
     {
-        $timer = $name instanceof Timer ? $name : $this->resolveTimerFromName($name);
+        $timer = $name instanceof TimerContract ? $name : $this->resolveTimerFromName($name);
 
         $timer->end();
     }
@@ -50,9 +52,9 @@ trait Timing
      *
      * @param  string|null $name
      *
-     * @return \Laravie\Profiler\Timer
+     * @return \Laravie\Profiler\Contracts\Timer
      */
-    protected function resolveTimerFromName($name = null)
+    protected function resolveTimerFromName(string $name = null): TimerContract
     {
         $id = is_null($name) ? uniqid() : $name;
 
@@ -69,5 +71,5 @@ trait Timing
      *
      * @return \Monolog\Logger
      */
-    abstract public function getMonolog();
+    abstract public function getMonolog(): Monolog;
 }

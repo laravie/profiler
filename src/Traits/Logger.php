@@ -18,7 +18,7 @@ trait Logger
      *
      * @return \Monolog\Logger
      */
-    public function getMonolog()
+    public function getMonolog(): Monolog
     {
         return $this->monolog;
     }
@@ -30,7 +30,7 @@ trait Logger
      *
      * @return $this
      */
-    public function setMonolog(Monolog $monolog)
+    public function setMonolog(Monolog $monolog): self
     {
         $this->monolog = $monolog;
 

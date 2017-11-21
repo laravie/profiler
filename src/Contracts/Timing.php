@@ -7,17 +7,17 @@ interface Timing
     /**
      * Time a process.
      *
-     * @param  string       $name
+     * @param  string  $name
      * @param  string|null  $message
      *
-     * @return string
+     * @return \Laravie\Profiler\Contracts\Timer
      */
-    public function time($name, $message = null);
+    public function time(string $name, string $message = null): Timer;
 
     /**
      * Calculate timed taken for a process to complete.
      *
-     * @param  string|null  $name
+     * @param  \Laravie\Profiler\Timer|string|null  $name
      *
      * @return void
      */

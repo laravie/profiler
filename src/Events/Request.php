@@ -25,7 +25,7 @@ class Request implements Listener
      *
      * @return string
      */
-    protected function getCurrentRoute()
+    protected function getCurrentRoute(): string
     {
         $request = app(HttpRequest::class);
         $method = strtoupper($request->getMethod());

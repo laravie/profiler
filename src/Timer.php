@@ -4,7 +4,7 @@ namespace Laravie\Profiler;
 
 use Orchestra\Support\Str;
 
-class Timer
+class Timer implements Contracts\Timer
 {
     use Traits\Logger;
 
@@ -40,10 +40,10 @@ class Timer
      * Construct new timer.
      *
      * @param string  $name
-     * @param int  $startedAt
+     * @param int|double  $startedAt
      * @param string|null  $message
      */
-    public function __construct($name, $startedAt, $message = null)
+    public function __construct(string $name, $startedAt, $message = null)
     {
         $this->name = $name;
         $this->startedAt = $startedAt;
@@ -78,7 +78,7 @@ class Timer
      *
      * @return void
      */
-    public function endIf($condition)
+    public function endIf(bool $condition)
     {
         if (!! $condition) {
             $this->end();
@@ -92,11 +92,9 @@ class Timer
      *
      * @return void
      */
-    public function endUnless($condition)
+    public function endUnless(bool $condition)
     {
-        if (! $condition) {
-            $this->end();
-        }
+        return $this->endIf(! $condition);
     }
 
     /**
@@ -104,7 +102,7 @@ class Timer
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         $message = $this->message ?: '{name} took {lapse} seconds.';
 
@@ -120,7 +118,7 @@ class Timer
      *
      * @return string
      */
-    public function name()
+    public function name(): string
     {
         return $this->name;
     }
@@ -128,7 +126,7 @@ class Timer
     /**
      * Get started at.
      *
-     * @return int
+     * @return int|double
      */
     public function startedAt()
     {
@@ -138,7 +136,7 @@ class Timer
     /**
      * Get seconds.
      *
-     * @return int
+     * @return int|double
      */
     public function lapse()
     {

@@ -26,7 +26,7 @@ class Profiler implements Contracts\Profiler
      *
      * @return $this
      */
-    public function extend(Contracts\Listener $listener)
+    public function extend(Contracts\Listener $listener): self
     {
         $listener->handle($this->getMonolog());
 
