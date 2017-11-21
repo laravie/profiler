@@ -19,7 +19,7 @@ class DatabaseQuery implements Listener
      */
     public function handle(Logger $monolog)
     {
-        $db = app('db');
+        $db = resolve('db');
 
         $callback = $this->buildQueryCallback($monolog);
 
