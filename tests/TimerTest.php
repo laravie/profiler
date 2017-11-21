@@ -28,7 +28,7 @@ class TimerTest extends TestCase
         $monolog = m::mock(Logger::class);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with('Hello world');
+        $monolog->shouldReceive('addInfo')->once()->with('Hello world', []);
 
         $timer = app(Profiler::class)->time('foo', 'Hello world');
 
@@ -53,7 +53,7 @@ class TimerTest extends TestCase
         $monolog = m::mock(Logger::class);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with(m::type('String'));
+        $monolog->shouldReceive('addInfo')->once()->with(m::type('String'), []);
 
         defined('LARAVEL_START') || define('LARAVEL_START', microtime(true));
 
@@ -69,7 +69,7 @@ class TimerTest extends TestCase
         $monolog = m::mock(Logger::class);
 
         $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with('Goodbye world');
+        $monolog->shouldReceive('addInfo')->once()->with('Goodbye world', []);
 
         defined('LARAVEL_START') || define('LARAVEL_START', microtime(true));
 

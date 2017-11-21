@@ -31,31 +31,45 @@ interface Timer
      */
     public function endUnless(bool $condition);
 
-    /**
-     * Get message.
-     *
-     * @return string
-     */
-    public function message(): string;
 
     /**
-     * Get name.
+     * Get or replace context.
      *
-     * @return string
+     * @param  array|null  $context
+     *
+     * @return $this|array
      */
-    public function name(): string;
+    public function context(array $context = []);
+
+    /**
+     * Get or replace message.
+     *
+     * @param  string|null  $message
+     *
+     * @return $this|string
+     */
+    public function message(string $message = null);
+
+    /**
+     * Get or replace name.
+     *
+     * @param  string|null  $name
+     *
+     * @return $this|string
+     */
+    public function name(string $name = null);
 
     /**
      * Get started at.
      *
-     * @return int|double
+     * @return int|float
      */
     public function startedAt();
 
     /**
      * Get seconds.
      *
-     * @return int|double
+     * @return int|float
      */
     public function lapse();
 }

@@ -23,6 +23,13 @@ class Timer implements Contracts\Timer
     protected $message;
 
     /**
+     * Timer context.
+     *
+     * @var array
+     */
+    protected $context = [];
+
+    /**
      * Microtime when the timer start ticking.
      *
      * @var int
@@ -40,7 +47,7 @@ class Timer implements Contracts\Timer
      * Construct new timer.
      *
      * @param string  $name
-     * @param int|double  $startedAt
+     * @param int|float  $startedAt
      * @param string|null  $message
      */
     public function __construct(string $name, $startedAt, string $message = null)
@@ -59,14 +66,17 @@ class Timer implements Contracts\Timer
      */
     public function end(callable $callback = null)
     {
-        $this->getMonolog()->addInfo($this->message());
+        $message = $this->message();
+
+        $this->getMonolog()->addInfo($message, $this->context);
 
         if (is_callable($callback)) {
             call_user_func($callback, [
                 'name' => $this->name,
-                'message' => $this->message(),
+                'message' => $message,
                 'startedAt' => $this->startedAt,
                 'lapse' => $this->lapse(),
+                'context' => $this->context,
             ]);
         }
     }
@@ -80,7 +90,7 @@ class Timer implements Contracts\Timer
      */
     public function endIf(bool $condition)
     {
-        if (!! $condition) {
+        if ((bool) $condition) {
             $this->end();
         }
     }
@@ -98,12 +108,38 @@ class Timer implements Contracts\Timer
     }
 
     /**
-     * Get message.
+     * Get or replace context.
      *
-     * @return string
+     * @param  array|null  $context
+     *
+     * @return $this|array
      */
-    public function message(): string
+    public function context(array $context = null)
     {
+        if (! is_null($context)) {
+            $this->context = $context;
+
+            return $this;
+        }
+
+        return $this->context;
+    }
+
+    /**
+     * Get or replace message.
+     *
+     * @param  string|null  $message
+     *
+     * @return $this|string
+     */
+    public function message(string $message = null)
+    {
+        if (! is_null($message)) {
+            $this->message = $message;
+
+            return $this;
+        }
+
         $message = $this->message ?: '{name} took {lapse} seconds.';
 
         return Str::replace($message, [
@@ -114,19 +150,27 @@ class Timer implements Contracts\Timer
     }
 
     /**
-     * Get name.
+     * Get or replace name.
      *
-     * @return string
+     * @param  string|null  $name
+     *
+     * @return $this|string
      */
-    public function name(): string
+    public function name(string $name = null)
     {
+        if (! is_null($name)) {
+            $this->name = $name;
+
+            return $this;
+        }
+
         return $this->name;
     }
 
     /**
      * Get started at.
      *
-     * @return int|double
+     * @return int|float
      */
     public function startedAt()
     {
@@ -136,13 +180,13 @@ class Timer implements Contracts\Timer
     /**
      * Get seconds.
      *
-     * @return int|double
+     * @return int|float
      */
     public function lapse()
     {
         $endedAt = microtime(true);
 
-        return ($endedAt - $this->startedAt);
+        return $endedAt - $this->startedAt;
     }
 
     /**

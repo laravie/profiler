@@ -68,7 +68,7 @@ trait Timing
      * Create a new timer.
      *
      * @param string  $name
-     * @param int|double  $startedAt
+     * @param int|float  $startedAt
      * @param string|null  $message
      *
      * @return \Laravie\Profiler\Contracts\Timer
