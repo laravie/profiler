@@ -21,7 +21,7 @@ trait Timing
      * @param  string       $name
      * @param  string|null  $message
      *
-     * @return \Laravie\Profiler\Timer
+     * @return \Laravie\Profiler\Contracts\Timer
      */
     public function time(string $name, string $message = null): TimerContract
     {
@@ -35,7 +35,7 @@ trait Timing
     /**
      * Calculate timed taken for a process to complete.
      *
-     * @param  \Laravie\Profiler\Timer|string|null  $name
+     * @param  \Laravie\Profiler\Contracts\Timer|string|null  $name
      *
      * @return void
      */
