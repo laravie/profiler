@@ -11,8 +11,8 @@ env:
     - setup=basic
     - coverage=no
   matrix:
-    - laravel=5.4.*
     - laravel=5.5.*
+    - laravel=dev-master
 
 before_script:
   - composer config discard-changes true
@@ -26,9 +26,9 @@ script:
 matrix:
   include:
     - php: 7.0
-      env: setup=lowest laravel=5.4.*
+      env: setup=lowest laravel=5.5.*
     - php: 7.0
-      env: setup=stable laravel=5.4.*
+      env: setup=stable laravel=5.5.*
   allow_failures:
     - php: 7.2
   fast_finish: true
