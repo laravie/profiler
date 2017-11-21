@@ -27,8 +27,7 @@ trait Timing
     {
         $id = isset($this->timers[$name]) ? uniqid($name) : $name;
 
-        $this->timers[$id] = (new Timer($name, microtime(true), $message))
-                                    ->setMonolog($this->getMonolog());
+        $this->timers[$id] = $this->createTimer($name, microtime(true), $message);
 
         return $this->timers[$id];
     }
@@ -62,8 +61,21 @@ trait Timing
             return $this->timers[$id];
         }
 
-        return (new Timer($name, constant('LARAVEL_START')))
-                    ->setMonolog($this->getMonolog());
+        return $this->createTimer($name, constant('LARAVEL_START'));
+    }
+
+    /**
+     * Create a new timer.
+     *
+     * @param string  $name
+     * @param int|double  $startedAt
+     * @param string|null  $message
+     *
+     * @return \Laravie\Profiler\Contracts\Timer
+     */
+    protected function createTimer(string $name, $startedAt, string $message = null): TimerContract
+    {
+        return (new Timer($name, $startedAt, $message))->setMonolog($this->getMonolog());
     }
 
     /**

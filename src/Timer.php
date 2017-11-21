@@ -43,7 +43,7 @@ class Timer implements Contracts\Timer
      * @param int|double  $startedAt
      * @param string|null  $message
      */
-    public function __construct(string $name, $startedAt, $message = null)
+    public function __construct(string $name, $startedAt, string $message = null)
     {
         $this->name = $name;
         $this->startedAt = $startedAt;
