@@ -31,7 +31,6 @@ interface Timer
      */
     public function endUnless(bool $condition);
 
-
     /**
      * Get or replace context.
      *
