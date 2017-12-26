@@ -2,6 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/profiler`.
 
+## 1.1.0
+
+Released: 2017-12-27
+
+### Added
+
+* Added `Laravie\Profiler\Contracts\Timer`.
+* Added support to add context to monolog.
+
+### Changes
+
+* Bump minimum supported PHP version to 7.0+.
+
 ## 1.0.0
 
 Released: 2017-07-25
