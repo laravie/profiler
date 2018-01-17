@@ -3,8 +3,9 @@
 namespace Laravie\Profiler;
 
 use Monolog\Logger;
+use Psr\Log\AbstractLogger;
 
-class Profiler implements Contracts\Profiler
+class Profiler extends AbstractLogger implements Contracts\Profiler
 {
     use Traits\Logger,
         Traits\Timing;
@@ -31,5 +32,19 @@ class Profiler implements Contracts\Profiler
         $listener->handle($this->getMonolog());
 
         return $this;
+    }
+
+    /**
+     * Logs with an arbitrary level.
+     *
+     * @param mixed  $level
+     * @param string $message
+     * @param array  $context
+     *
+     * @return void
+     */
+    public function log($level, $message, array $context = array())
+    {
+        $this->getMonolog()->log($level, $message, $context);
     }
 }
