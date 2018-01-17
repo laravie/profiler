@@ -37,13 +37,6 @@ class Timer implements Contracts\Timer
     protected $startedAt;
 
     /**
-     * Started at resolver.
-     *
-     * @var callable
-     */
-    protected $startedAtResolver;
-
-    /**
      * Construct new timer.
      *
      * @param string  $name
@@ -144,21 +137,11 @@ class Timer implements Contracts\Timer
      *
      * @return $this
      */
-    public function name(string $name)
+    public function name(string $name): self
     {
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * Get started at.
-     *
-     * @return int|float
-     */
-    public function startedAt()
-    {
-        return $this->startedAt;
     }
 
     /**

@@ -61,13 +61,6 @@ interface Timer
     public function name(string $name);
 
     /**
-     * Get started at.
-     *
-     * @return int|float
-     */
-    public function startedAt();
-
-    /**
      * Get seconds.
      *
      * @return int|float
