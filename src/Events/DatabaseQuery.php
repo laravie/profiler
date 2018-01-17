@@ -2,8 +2,8 @@
 
 namespace Laravie\Profiler\Events;
 
-use Monolog\Logger;
 use Illuminate\Support\Str;
+use Illuminate\Log\LogManager;
 use Laravie\Profiler\Contracts\Listener;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Events\QueryExecuted;
@@ -13,15 +13,15 @@ class DatabaseQuery implements Listener
     /**
      * Handle the listener.
      *
-     * @param  \Monolog\Logger  $monolog
+     * @param  \Illuminate\Log\LogManager  $logger
      *
      * @return void
      */
-    public function handle(Logger $monolog)
+    public function handle(LogManager $logger): void
     {
         $db = resolve('db');
 
-        $callback = $this->buildQueryCallback($monolog);
+        $callback = $this->buildQueryCallback($logger);
 
         foreach ($db->getQueryLog() as $query) {
             $callback(new QueryExecuted($query['query'], $query['bindings'], $query['time'], $db));
@@ -33,16 +33,16 @@ class DatabaseQuery implements Listener
     /**
      * BUild Query Callback.
      *
-     * @param  \Monolog\Logger  $monolog
+     * @param  \Illuminate\Log\LogManager  $logger
      *
-     * @return \Closure
+     * @return callable
      */
-    protected function buildQueryCallback(Logger $monolog)
+    protected function buildQueryCallback(LogManager $logger): callable
     {
-        return function (QueryExecuted $query) use ($monolog) {
+        return function (QueryExecuted $query) use ($logger) {
             $sql = Str::replaceArray('?', $query->connection->prepareBindings($query->bindings), $query->sql);
 
-            $monolog->addInfo("<comment>{$sql} [{$query->time}ms]</comment>");
+            $logger->info("<comment>{$sql} [{$query->time}ms]</comment>");
         };
     }
 }

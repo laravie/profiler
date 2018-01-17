@@ -2,8 +2,8 @@
 
 namespace Laravie\Profiler;
 
-use Monolog\Logger;
 use Psr\Log\AbstractLogger;
+use Illuminate\Log\LogManager;
 
 class Profiler extends AbstractLogger implements Contracts\Profiler
 {
@@ -13,11 +13,11 @@ class Profiler extends AbstractLogger implements Contracts\Profiler
     /**
      * Setup a new profiler.
      *
-     * @param \Monolog\Logger $monolog
+     * @param \Illuminate\Log\LogManager $logger
      */
-    public function __construct(Logger $monolog)
+    public function __construct(LogManager $logger)
     {
-        $this->setMonolog($monolog);
+        $this->setLogger($logger);
     }
 
     /**
@@ -29,7 +29,7 @@ class Profiler extends AbstractLogger implements Contracts\Profiler
      */
     public function extend(Contracts\Listener $listener): self
     {
-        $listener->handle($this->getMonolog());
+        $listener->handle($this->getLogger());
 
         return $this;
     }
@@ -45,6 +45,6 @@ class Profiler extends AbstractLogger implements Contracts\Profiler
      */
     public function log($level, $message, array $context = [])
     {
-        $this->getMonolog()->log($level, $message, $context);
+        $this->getLogger()->log($level, $message, $context);
     }
 }

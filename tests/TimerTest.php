@@ -6,6 +6,7 @@ use Mockery as m;
 use Monolog\Logger;
 use Laravie\Profiler\Timer;
 use Psr\Log\LoggerInterface;
+use Illuminate\Log\LogManager;
 use Illuminate\Support\Facades\Log;
 use Laravie\Profiler\Contracts\Profiler;
 
@@ -24,11 +25,9 @@ class TimerTest extends TestCase
      /** @test */
     function timer_can_output_to_monolog()
     {
-        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
-        $monolog = m::mock(Logger::class);
+        $this->app->instance('log', $logger = m::mock(LogManager::class));
 
-        $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with('Hello world', []);
+        $logger->shouldReceive('info')->once()->with('Hello world', []);
 
         $timer = app(Profiler::class)->time('foo', 'Hello world');
 
@@ -49,11 +48,9 @@ class TimerTest extends TestCase
     /** @test */
     function timer_can_be_ended_without_start()
     {
-        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
-        $monolog = m::mock(Logger::class);
+        $this->app->instance('log', $logger = m::mock(LogManager::class));
 
-        $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with(m::type('String'), []);
+        $logger->shouldReceive('info')->once()->with(m::type('String'), []);
 
         defined('LARAVEL_START') || define('LARAVEL_START', microtime(true));
 
@@ -65,11 +62,9 @@ class TimerTest extends TestCase
     /** @test */
     function timer_can_be_ended_using_name()
     {
-        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
-        $monolog = m::mock(Logger::class);
+        $this->app->instance('log', $logger = m::mock(LogManager::class));
 
-        $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with('Goodbye world', []);
+        $logger->shouldReceive('info')->once()->with('Goodbye world', []);
 
         defined('LARAVEL_START') || define('LARAVEL_START', microtime(true));
 

@@ -4,8 +4,9 @@ namespace Laravie\Profiler\TestCase;
 
 use Mockery as m;
 use Monolog\Logger;
-use Laravie\Profiler\Contracts\Profiler;
+use Illuminate\Log\LogManager;
 use Laravie\Profiler\Contracts\Listener;
+use Laravie\Profiler\Contracts\Profiler;
 
 class ProfilerTest extends TestCase
 {
@@ -14,7 +15,7 @@ class ProfilerTest extends TestCase
     {
         $listener = m::mock(Listener::class);
 
-        $listener->shouldReceive('handle')->with(m::type(Logger::class))->andReturnNull();
+        $listener->shouldReceive('handle')->with(m::type(LogManager::class))->andReturnNull();
 
         $this->assertInstanceOf(Profiler::class, app(Profiler::class)->extend($listener));
     }

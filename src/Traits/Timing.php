@@ -3,7 +3,7 @@
 namespace Laravie\Profiler\Traits;
 
 use Laravie\Profiler\Timer;
-use Monolog\Logger as Monolog;
+use Illuminate\Log\LogManager;
 use Laravie\Profiler\Contracts\Timer as TimerContract;
 
 trait Timing
@@ -75,13 +75,13 @@ trait Timing
      */
     protected function createTimer(string $name, $startedAt, string $message = null): TimerContract
     {
-        return (new Timer($name, $startedAt, $message))->setMonolog($this->getMonolog());
+        return (new Timer($name, $startedAt, $message))->setLogger($this->getLogger());
     }
 
     /**
-     * Get the monolog instance.
+     * Get the log manager instance.
      *
-     * @return \Monolog\Logger
+     * @return \Illuminate\Log\LogManager
      */
-    abstract public function getMonolog(): Monolog;
+    abstract public function getLogger(): LogManager;
 }

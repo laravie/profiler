@@ -61,7 +61,7 @@ class Timer implements Contracts\Timer
     {
         $message = $this->buildMessage();
 
-        $this->getMonolog()->addInfo($message, $this->context);
+        $this->getLogger()->info($message, $this->context);
 
         if (is_callable($callback)) {
             call_user_func($callback, [
@@ -187,8 +187,6 @@ class Timer implements Contracts\Timer
     {
         return $this->name;
     }
-
-
 
     /**
      * Build message.

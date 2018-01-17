@@ -21,7 +21,7 @@ class ProfilerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Contracts\Profiler::class, function ($app) {
-            return new Profiler($app->make('log')->getMonolog());
+            return new Profiler($app->make('log'));
         });
     }
 

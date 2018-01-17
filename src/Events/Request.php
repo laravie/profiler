@@ -3,6 +3,7 @@
 namespace Laravie\Profiler\Events;
 
 use Monolog\Logger;
+use Illuminate\Log\LogManager;
 use Laravie\Profiler\Contracts\Listener;
 use Illuminate\Http\Request as HttpRequest;
 
@@ -11,13 +12,13 @@ class Request implements Listener
     /**
      * Handle the listener.
      *
-     * @param  \Monolog\Logger  $monolog
+     * @param  \Illuminate\Log\LogManager  $logger
      *
      * @return void
      */
-    public function handle(Logger $monolog)
+    public function handle(LogManager $logger): void
     {
-        $monolog->addInfo('<info>Request: '.$this->getCurrentRoute().'</info>');
+        $logger->info('<info>Request: '.$this->getCurrentRoute().'</info>');
     }
 
     /**

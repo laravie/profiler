@@ -3,8 +3,7 @@
 namespace Laravie\Profiler\TestCase\Events;
 
 use Mockery as m;
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
+use Illuminate\Log\LogManager;
 use Laravie\Profiler\Events\Request;
 use Illuminate\Support\Facades\Route;
 use Laravie\Profiler\TestCase\TestCase;
@@ -15,11 +14,9 @@ class RequestTest extends TestCase
     /** @test */
     function log_visit_to_page()
     {
-        $this->app->instance('log', $logger = m::mock(LoggerInterface::class));
-        $monolog = m::mock(Logger::class);
+        $this->app->instance('log', $logger = m::mock(LogManager::class));
 
-        $logger->shouldReceive('getMonolog')->once()->andReturn($monolog);
-        $monolog->shouldReceive('addInfo')->once()->with('<info>Request: GET localhost/</info>');
+        $logger->shouldReceive('info')->once()->with('<info>Request: GET localhost/</info>');
 
         app(Profiler::class)->extend(new Request());
     }

@@ -2,16 +2,16 @@
 
 namespace Laravie\Profiler\Contracts;
 
-use Monolog\Logger;
+use Illuminate\Log\LogManager;
 
 interface Listener
 {
     /**
      * Handle the listener.
      *
-     * @param  \Monolog\Logger  $monolog
+     * @param  \Illuminate\Log\LogManager  $logger
      *
      * @return void
      */
-    public function handle(Logger $monolog);
+    public function handle(LogManager $logger): void;
 }

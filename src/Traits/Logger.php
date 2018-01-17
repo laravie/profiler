@@ -2,37 +2,37 @@
 
 namespace Laravie\Profiler\Traits;
 
-use Monolog\Logger as Monolog;
+use Illuminate\Log\LogManager;
 
 trait Logger
 {
     /**
      * Monolog instance.
      *
-     * @var \Monolog\Logger
+     * @var \Illuminate\Log\LogManager
      */
-    protected $monolog;
+    protected $logger;
 
     /**
-     * Get monolog instance.
+     * Get log manager instance.
      *
      * @return \Monolog\Logger
      */
-    public function getMonolog(): Monolog
+    public function getLogger(): LogManager
     {
-        return $this->monolog;
+        return $this->logger;
     }
 
     /**
-     * Set monolog instance.
+     * Set log manager instance.
      *
-     * @param  \Monolog\Logger  $monolog
+     * @param  \Illuminate\Log\LogManager  $logger
      *
      * @return $this
      */
-    public function setMonolog(Monolog $monolog): self
+    public function setLogger(LogManager $logger): self
     {
-        $this->monolog = $monolog;
+        $this->logger = $logger;
 
         return $this;
     }
