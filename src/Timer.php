@@ -200,6 +200,12 @@ class Timer implements Contracts\Timer
             throw new InvalidArgumentException("Property [{$key}] doesn't exist!");
         }
 
+        $build = 'build'.Str::studly($key);
+
+        if (method_exists($this, $build)) {
+            return $this->{$build}();
+        }
+
         return $this->{$key};
     }
 
