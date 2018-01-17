@@ -64,7 +64,7 @@ class Timer implements Contracts\Timer
      *
      * @return void
      */
-    public function end(callable $callback = null): void
+    public function end(?callable $callback = null): void
     {
         $message = $this->buildMessage();
 
@@ -85,13 +85,14 @@ class Timer implements Contracts\Timer
      * End the timer if condition is matched.
      *
      * @param  bool  $condition
+     * @param  callable|null  $callback
      *
      * @return void
      */
-    public function endIf(bool $condition): void
+    public function endIf(bool $condition, ?callable $callback = null): void
     {
         if ((bool) $condition) {
-            $this->end();
+            $this->end($callback);
         }
     }
 
@@ -99,12 +100,13 @@ class Timer implements Contracts\Timer
      * End the timer unless condition is matched.
      *
      * @param  bool  $condition
+     * @param  callable|null  $callback
      *
      * @return void
      */
-    public function endUnless(bool $condition): void
+    public function endUnless(bool $condition, ?callable $callback = null): void
     {
-        $this->endIf(! $condition);
+        $this->endIf(! $condition, $callback);
     }
 
     /**
