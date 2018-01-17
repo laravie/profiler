@@ -138,22 +138,6 @@ class Timer implements Contracts\Timer
     }
 
     /**
-     * Build message.
-     *
-     * @return string
-     */
-    protected function buildMessage(): string
-    {
-        $message = $this->message ?: '{name} took {lapse} seconds.';
-
-        return Str::replace($message, [
-            'name' => $this->name,
-            'started' => $this->startedAt,
-            'lapse' => $this->lapse(),
-        ]);
-    }
-
-    /**
      * Get or replace name.
      *
      * @param  string  $name
@@ -219,5 +203,23 @@ class Timer implements Contracts\Timer
     public function __toString(): string
     {
         return $this->name;
+    }
+
+
+
+    /**
+     * Build message.
+     *
+     * @return string
+     */
+    protected function buildMessage(): string
+    {
+        $message = $this->message ?: '{name} took {lapse} seconds.';
+
+        return Str::replace($message, [
+            'name' => $this->name,
+            'started' => $this->startedAt,
+            'lapse' => $this->lapse(),
+        ]);
     }
 }
