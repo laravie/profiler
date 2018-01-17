@@ -39,7 +39,7 @@ trait Timing
      *
      * @return void
      */
-    public function timeEnd($name = null)
+    public function timeEnd($name = null): void
     {
         $timer = $name instanceof TimerContract ? $name : $this->resolveTimerFromName($name);
 

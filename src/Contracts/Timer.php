@@ -11,7 +11,7 @@ interface Timer
      *
      * @return void
      */
-    public function end(callable $callback = null);
+    public function end(callable $callback = null): void;
 
     /**
      * End the timer if condition is matched.
@@ -20,7 +20,7 @@ interface Timer
      *
      * @return void
      */
-    public function endIf(bool $condition);
+    public function endIf(bool $condition): void;
 
     /**
      * End the timer unless condition is matched.
@@ -29,34 +29,34 @@ interface Timer
      *
      * @return void
      */
-    public function endUnless(bool $condition);
+    public function endUnless(bool $condition): void;
 
     /**
      * Get or replace context.
      *
-     * @param  array|null  $context
+     * @param  array  $context
      *
-     * @return $this|array
+     * @return $this
      */
-    public function context(array $context = []);
+    public function context(array $context);
 
     /**
      * Get or replace message.
      *
-     * @param  string|null  $message
+     * @param  string  $message
      *
-     * @return $this|string
+     * @return $this
      */
-    public function message(string $message = null);
+    public function message(string $message);
 
     /**
      * Get or replace name.
      *
-     * @param  string|null  $name
+     * @param  string  $name
      *
-     * @return $this|string
+     * @return $this
      */
-    public function name(string $name = null);
+    public function name(string $name);
 
     /**
      * Get started at.

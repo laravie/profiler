@@ -21,5 +21,5 @@ interface Timing
      *
      * @return void
      */
-    public function timeEnd($name = null);
+    public function timeEnd($name = null): void;
 }

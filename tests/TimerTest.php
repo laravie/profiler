@@ -18,7 +18,7 @@ class TimerTest extends TestCase
 
         $this->assertInstanceOf(Timer::class, $timer);
         $this->assertEquals('foo', $timer);
-        $this->assertSame('foo', $timer->name());
+        $this->assertSame('foo', $timer->name);
     }
 
      /** @test */
@@ -41,8 +41,8 @@ class TimerTest extends TestCase
         $timer1 = app(Profiler::class)->time('foo');
         $timer2 = app(Profiler::class)->time('foo');
 
-        $this->assertSame('foo', $timer1->name());
-        $this->assertSame('foo', $timer2->name());
+        $this->assertSame('foo', $timer1->name);
+        $this->assertSame('foo', $timer2->name);
         $this->assertNotSame($timer1, $timer2);
     }
 

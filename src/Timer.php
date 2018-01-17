@@ -64,9 +64,9 @@ class Timer implements Contracts\Timer
      *
      * @return void
      */
-    public function end(callable $callback = null)
+    public function end(callable $callback = null): void
     {
-        $message = $this->message();
+        $message = $this->buildMessage();
 
         $this->getMonolog()->addInfo($message, $this->context);
 
@@ -88,7 +88,7 @@ class Timer implements Contracts\Timer
      *
      * @return void
      */
-    public function endIf(bool $condition)
+    public function endIf(bool $condition): void
     {
         if ((bool) $condition) {
             $this->end();
@@ -102,44 +102,46 @@ class Timer implements Contracts\Timer
      *
      * @return void
      */
-    public function endUnless(bool $condition)
+    public function endUnless(bool $condition): void
     {
-        return $this->endIf(! $condition);
+        $this->endIf(! $condition);
     }
 
     /**
      * Get or replace context.
      *
-     * @param  array|null  $context
+     * @param  array  $context
      *
-     * @return $this|array
+     * @return $this
      */
-    public function context(array $context = null)
+    public function context(array $context): self
     {
-        if (! is_null($context)) {
-            $this->context = $context;
+        $this->context = $context;
 
-            return $this;
-        }
-
-        return $this->context;
+        return $this;
     }
 
     /**
      * Get or replace message.
      *
-     * @param  string|null  $message
+     * @param  string  $message
      *
-     * @return $this|string
+     * @return $this
      */
-    public function message(string $message = null)
+    public function message(string $message): self
     {
-        if (! is_null($message)) {
-            $this->message = $message;
+        $this->message = $message;
 
-            return $this;
-        }
+        return $this;
+    }
 
+    /**
+     * Build message.
+     *
+     * @return string
+     */
+    protected function buildMessage(): string
+    {
         $message = $this->message ?: '{name} took {lapse} seconds.';
 
         return Str::replace($message, [
@@ -152,19 +154,15 @@ class Timer implements Contracts\Timer
     /**
      * Get or replace name.
      *
-     * @param  string|null  $name
+     * @param  string  $name
      *
-     * @return $this|string
+     * @return $this
      */
-    public function name(string $name = null)
+    public function name(string $name)
     {
-        if (! is_null($name)) {
-            $this->name = $name;
+        $this->name = $name;
 
-            return $this;
-        }
-
-        return $this->name;
+        return $this;
     }
 
     /**
@@ -190,12 +188,27 @@ class Timer implements Contracts\Timer
     }
 
     /**
+     * Property accessor.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    public function __get(string $key)
+    {
+        if (! property_exists($this, $key)) {
+            throw new InvalidArgumentException("Property [{$key}] doesn't exist!");
+        }
+
+        return $this->{$key};
+    }
+
+    /**
      * Return Timer name as string.
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->name();
+        return $this->name;
     }
 }
