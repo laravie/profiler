@@ -191,6 +191,7 @@ class Timer implements Contracts\Timer
      * Property accessor.
      *
      * @param  string  $key
+     *
      * @return mixed
      */
     public function __get(string $key)

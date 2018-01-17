@@ -43,7 +43,7 @@ class Profiler extends AbstractLogger implements Contracts\Profiler
      *
      * @return void
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $this->getMonolog()->log($level, $message, $context);
     }
