@@ -2,6 +2,16 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/profiler`.
 
+## 2.0.0
+
+Released: 2018-02-09
+
+### Changes
+
+
+* Bump minimum supported PHP version to 7.1+.
+* Update supported Laravel Framework to 5.6+.
+
 ## 1.1.0
 
 Released: 2017-12-27
