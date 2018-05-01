@@ -8,7 +8,6 @@ Released: 2018-05-01
 
 ### Changes
 
-
 * Bump minimum supported PHP version to 7.1+.
 * Update supported Laravel Framework to 5.6+.
 
