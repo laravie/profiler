@@ -32,7 +32,6 @@ abstract class TestCase extends Testbench
     {
         return [
             \Laravie\Profiler\ProfilerServiceProvider::class,
-            \Orchestra\Database\ConsoleServiceProvider::class,
         ];
     }
 }
