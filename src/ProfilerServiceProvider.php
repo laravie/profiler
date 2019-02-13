@@ -3,8 +3,9 @@
 namespace Laravie\Profiler;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class ProfilerServiceProvider extends ServiceProvider
+class ProfilerServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Indicates if loading of the provider is deferred.

@@ -19,7 +19,7 @@ class DatabaseQuery implements Listener
      */
     public function handle(LogManager $logger): void
     {
-        $db = resolve('db');
+        $db = \resolve('db');
 
         $callback = $this->buildQueryCallback($logger);
 
@@ -27,7 +27,7 @@ class DatabaseQuery implements Listener
             $callback(new QueryExecuted($query['query'], $query['bindings'], $query['time'], $db));
         }
 
-        resolve(Dispatcher::class)->listen(QueryExecuted::class, $callback);
+        \resolve(Dispatcher::class)->listen(QueryExecuted::class, $callback);
     }
 
     /**

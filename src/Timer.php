@@ -63,8 +63,8 @@ class Timer implements Contracts\Timer
 
         $this->getLogger()->info($message, $this->context);
 
-        if (is_callable($callback)) {
-            call_user_func($callback, [
+        if (\is_callable($callback)) {
+            \call_user_func($callback, [
                 'name' => $this->name,
                 'message' => $message,
                 'startedAt' => $this->startedAt,
@@ -151,7 +151,7 @@ class Timer implements Contracts\Timer
      */
     public function lapse()
     {
-        $endedAt = microtime(true);
+        $endedAt = \microtime(true);
 
         return $endedAt - $this->startedAt;
     }
@@ -165,13 +165,13 @@ class Timer implements Contracts\Timer
      */
     public function __get(string $key)
     {
-        if (! property_exists($this, $key)) {
+        if (! \property_exists($this, $key)) {
             throw new InvalidArgumentException("Property [{$key}] doesn't exist!");
         }
 
         $build = 'build'.Str::studly($key);
 
-        if (method_exists($this, $build)) {
+        if (\method_exists($this, $build)) {
             return $this->{$build}();
         }
 

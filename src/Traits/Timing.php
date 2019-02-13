@@ -25,9 +25,9 @@ trait Timing
      */
     public function time(string $name, string $message = null): TimerContract
     {
-        $id = isset($this->timers[$name]) ? uniqid($name) : $name;
+        $id = isset($this->timers[$name]) ? \uniqid($name) : $name;
 
-        $this->timers[$id] = $this->createTimer($name, microtime(true), $message);
+        $this->timers[$id] = $this->createTimer($name, \microtime(true), $message);
 
         return $this->timers[$id];
     }
@@ -55,7 +55,7 @@ trait Timing
      */
     protected function resolveTimerFromName(string $name = null): TimerContract
     {
-        $id = is_null($name) ? uniqid() : $name;
+        $id = \is_null($name) ? \uniqid() : $name;
 
         if (isset($this->timers[$id])) {
             return $this->timers[$id];
