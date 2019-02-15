@@ -59,18 +59,18 @@ class Timer implements Contracts\Timer
      */
     public function end(?callable $callback = null): void
     {
-        $message = $this->buildMessage();
+        $context =  \array_merge($this->context, [
+            'name' => $this->name,
+            'started' => $this->startedAt,
+            'lapse' => $this->lapse(),
+        ]);
+
+        $message = $this->buildMessage($context);
 
         $this->getLogger()->info($message, $this->context);
 
         if (\is_callable($callback)) {
-            \call_user_func($callback, [
-                'name' => $this->name,
-                'message' => $message,
-                'startedAt' => $this->startedAt,
-                'lapse' => $this->lapse(),
-                'context' => $this->context,
-            ]);
+            \call_user_func($callback, $message, $context);
         }
     }
 
@@ -193,14 +193,10 @@ class Timer implements Contracts\Timer
      *
      * @return string
      */
-    protected function buildMessage(): string
+    protected function buildMessage(array $context): string
     {
         $message = $this->message ?: '{name} took {lapse} seconds.';
 
-        return Str::replace($message, [
-            'name' => $this->name,
-            'started' => $this->startedAt,
-            'lapse' => $this->lapse(),
-        ]);
+        return Str::replace($message, $context);
     }
 }
