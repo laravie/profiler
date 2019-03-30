@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Laravie\Profiler\TestCase\Stubs\User::class, function (Faker\Generator $faker) {
+$factory->define(Laravie\Profiler\Tests\Stubs\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

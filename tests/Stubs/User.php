@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Profiler\TestCase\Stubs;
+namespace Laravie\Profiler\Tests\Stubs;
 
 use Illuminate\Database\Eloquent\Model;
 
