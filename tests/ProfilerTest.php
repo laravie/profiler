@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Profiler\TestCase;
+namespace Laravie\Profiler\Tests;
 
 use Mockery as m;
 use Monolog\Logger;

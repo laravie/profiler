@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravie\\Profiler\\TestCase\\": "tests/"
+            "Laravie\\Profiler\\Tests\\": "tests/"
         }
     },
     "require": {

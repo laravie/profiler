@@ -1,14 +1,14 @@
 <?php
 
-namespace Laravie\Profiler\TestCase\Events;
+namespace Laravie\Profiler\Tests\Events;
 
 use Mockery as m;
 use Illuminate\Log\LogManager;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\Event;
-use Laravie\Profiler\TestCase\TestCase;
+use Laravie\Profiler\Tests\TestCase;
 use Laravie\Profiler\Contracts\Profiler;
-use Laravie\Profiler\TestCase\Stubs\User;
+use Laravie\Profiler\Tests\Stubs\User;
 use Laravie\Profiler\Events\DatabaseQuery;
 use Illuminate\Database\Events\QueryExecuted;
 
