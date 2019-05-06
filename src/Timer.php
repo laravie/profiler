@@ -59,7 +59,7 @@ class Timer implements Contracts\Timer
      */
     public function end(?callable $callback = null): void
     {
-        $context =  \array_merge($this->context, [
+        $context = \array_merge($this->context, [
             'name' => $this->name,
             'started' => $this->startedAt,
             'lapse' => $this->lapse(),
