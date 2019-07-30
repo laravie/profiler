@@ -28,12 +28,12 @@ class Request implements Listener
      */
     protected function getCurrentRoute(): string
     {
-        $request = resolve(HttpRequest::class);
-        $method = strtoupper($request->getMethod());
-        $path = ltrim($request->path(), '/');
+        $request = \resolve(HttpRequest::class);
+        $method = \strtoupper($request->getMethod());
+        $path = \ltrim($request->path(), '/');
         $host = $request->getHost();
 
-        ! is_null($host) && $host = rtrim($host, '/');
+        ! \is_null($host) && $host = \rtrim($host, '/');
 
         return "{$method} {$host}/{$path}";
     }

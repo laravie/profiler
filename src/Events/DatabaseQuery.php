@@ -39,7 +39,7 @@ class DatabaseQuery implements Listener
      */
     protected function buildQueryCallback(LogManager $logger): callable
     {
-        return function (QueryExecuted $query) use ($logger) {
+        return static function (QueryExecuted $query) use ($logger) {
             $sql = Str::replaceArray('?', $query->connection->prepareBindings($query->bindings), $query->sql);
 
             $logger->info("<comment>{$sql} [{$query->time}ms]</comment>");

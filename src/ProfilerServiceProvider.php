@@ -14,7 +14,7 @@ class ProfilerServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->singleton(Contracts\Profiler::class, function ($app) {
+        $this->app->singleton(Contracts\Profiler::class, static function ($app) {
             return new Profiler($app->make('log'));
         });
     }

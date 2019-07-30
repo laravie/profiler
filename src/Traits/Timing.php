@@ -57,11 +57,7 @@ trait Timing
     {
         $id = \is_null($name) ? \uniqid() : $name;
 
-        if (isset($this->timers[$id])) {
-            return $this->timers[$id];
-        }
-
-        return $this->createTimer($name, constant('LARAVEL_START'));
+        return $this->timers[$id] ?? $this->createTimer($name, constant('LARAVEL_START'));
     }
 
     /**
