@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Profiler\Traits;
+namespace Laravie\Profiler\Concerns;
 
 use Illuminate\Log\LogManager;
 
@@ -16,7 +16,7 @@ trait Logger
     /**
      * Get log manager instance.
      *
-     * @return \Monolog\Logger
+     * @return \Illuminate\Log\LogManager
      */
     public function getLogger(): LogManager
     {
@@ -30,7 +30,7 @@ trait Logger
      *
      * @return $this
      */
-    public function setLogger(LogManager $logger): self
+    public function setLogger(LogManager $logger)
     {
         $this->logger = $logger;
 

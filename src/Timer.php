@@ -6,7 +6,7 @@ use Orchestra\Support\Str;
 
 class Timer implements Contracts\Timer
 {
-    use Traits\Logger;
+    use Concerns\Logger;
 
     /**
      * Timer unique name.
@@ -109,7 +109,7 @@ class Timer implements Contracts\Timer
      *
      * @return $this
      */
-    public function context(array $context): self
+    public function context(array $context)
     {
         $this->context = $context;
 
@@ -123,7 +123,7 @@ class Timer implements Contracts\Timer
      *
      * @return $this
      */
-    public function message(string $message): self
+    public function message(string $message)
     {
         $this->message = $message;
 
@@ -137,7 +137,7 @@ class Timer implements Contracts\Timer
      *
      * @return $this
      */
-    public function name(string $name): self
+    public function name(string $name)
     {
         $this->name = $name;
 

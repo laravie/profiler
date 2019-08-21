@@ -7,8 +7,8 @@ use Illuminate\Log\LogManager;
 
 class Profiler extends AbstractLogger implements Contracts\Profiler
 {
-    use Traits\Logger,
-        Traits\Timing;
+    use Concerns\Logger,
+        Concerns\Timing;
 
     /**
      * Setup a new profiler.
@@ -27,7 +27,7 @@ class Profiler extends AbstractLogger implements Contracts\Profiler
      *
      * @return $this
      */
-    public function extend(Contracts\Listener $listener): self
+    public function extend(Contracts\Listener $listener)
     {
         $listener->handle($this->getLogger());
 

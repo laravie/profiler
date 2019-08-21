@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravie\Profiler\Traits;
+namespace Laravie\Profiler\Concerns;
 
 use Laravie\Profiler\Timer;
 use Illuminate\Log\LogManager;
