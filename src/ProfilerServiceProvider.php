@@ -3,6 +3,7 @@
 namespace Laravie\Profiler;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
 class ProfilerServiceProvider extends ServiceProvider implements DeferrableProvider
@@ -14,7 +15,7 @@ class ProfilerServiceProvider extends ServiceProvider implements DeferrableProvi
      */
     public function register()
     {
-        $this->app->singleton(Contracts\Profiler::class, static function ($app) {
+        $this->app->singleton(Contracts\Profiler::class, static function (Container $app) {
             return new Profiler($app->make('log'));
         });
     }

@@ -2,6 +2,17 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/profiler`.
 
+## 3.0.0
+
+Released: 2019-08-28
+
+### Changes
+
+* Add support to Laravel Framework v6.+.
+* Refactor `Laravie\Profiler\Timer`.
+* Improve performance by prefixing all global functions calls with `\` to skip the look up and resolve process and go straight to the global function.
+* return `self` should only be used when method is marked as `final`.
+
 ## 2.0.1
 
 Released: 2019-02-17

@@ -21,6 +21,7 @@
     },
     "require": {
         "php": ">=7.2",
+        "illuminate/contracts": "^5.8 || ^6.0",
         "illuminate/support": "^5.8 || ^6.0",
         "orchestra/support-core": "^3.8 || ^4.0",
         "psr/log": "^1.0"
