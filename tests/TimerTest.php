@@ -3,17 +3,14 @@
 namespace Laravie\Profiler\Tests;
 
 use Mockery as m;
-use Monolog\Logger;
 use Laravie\Profiler\Timer;
-use Psr\Log\LoggerInterface;
 use Illuminate\Log\LogManager;
-use Illuminate\Support\Facades\Log;
 use Laravie\Profiler\Contracts\Profiler;
 
 class TimerTest extends TestCase
 {
     /** @test */
-    function timer_can_be_initiated()
+    public function timer_can_be_initiated()
     {
         $timer = app(Profiler::class)->time('foo');
 
@@ -22,8 +19,8 @@ class TimerTest extends TestCase
         $this->assertSame('foo', $timer->name);
     }
 
-     /** @test */
-    function timer_can_output_to_monolog()
+    /** @test */
+    public function timer_can_output_to_monolog()
     {
         $this->app->instance('log', $logger = m::mock(LogManager::class));
 
@@ -35,7 +32,7 @@ class TimerTest extends TestCase
     }
 
     /** @test */
-    function timer_is_not_duplicated_when_given_the_same_name()
+    public function timer_is_not_duplicated_when_given_the_same_name()
     {
         $timer1 = app(Profiler::class)->time('foo');
         $timer2 = app(Profiler::class)->time('foo');
@@ -46,7 +43,7 @@ class TimerTest extends TestCase
     }
 
     /** @test */
-    function timer_can_be_ended_without_start()
+    public function timer_can_be_ended_without_start()
     {
         $this->app->instance('log', $logger = m::mock(LogManager::class));
 
@@ -60,7 +57,7 @@ class TimerTest extends TestCase
     }
 
     /** @test */
-    function timer_can_be_ended_using_name()
+    public function timer_can_be_ended_using_name()
     {
         $this->app->instance('log', $logger = m::mock(LogManager::class));
 

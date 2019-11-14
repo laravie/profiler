@@ -4,18 +4,17 @@ namespace Laravie\Profiler\Tests\Events;
 
 use Mockery as m;
 use Illuminate\Log\LogManager;
-use Illuminate\Database\Connection;
-use Illuminate\Support\Facades\Event;
 use Laravie\Profiler\Tests\TestCase;
-use Laravie\Profiler\Contracts\Profiler;
+use Illuminate\Support\Facades\Event;
 use Laravie\Profiler\Tests\Stubs\User;
+use Laravie\Profiler\Contracts\Profiler;
 use Laravie\Profiler\Events\DatabaseQuery;
 use Illuminate\Database\Events\QueryExecuted;
 
 class DatabaseQueryTest extends TestCase
 {
     /** @test */
-    function query_should_be_logged()
+    public function query_should_be_logged()
     {
         $profiler = app(Profiler::class);
         $profiler->extend(new DatabaseQuery());
@@ -26,7 +25,7 @@ class DatabaseQueryTest extends TestCase
     }
 
     /** @test */
-    function accepts_query_executed_event()
+    public function accepts_query_executed_event()
     {
         $this->app->instance('log', $logger = m::mock(LogManager::class));
 
@@ -38,7 +37,7 @@ class DatabaseQueryTest extends TestCase
         $profiler = app(Profiler::class);
         $profiler->extend(new DatabaseQuery());
 
-        event(new QueryExecuted("SELECT * FROM `foo` WHERE id=?", [1], 1, $db));
-        event(new QueryExecuted("SELECT * FROM `users` WHERE id=?", [10], 3, $db));
+        event(new QueryExecuted('SELECT * FROM `foo` WHERE id=?', [1], 1, $db));
+        event(new QueryExecuted('SELECT * FROM `users` WHERE id=?', [10], 3, $db));
     }
 }

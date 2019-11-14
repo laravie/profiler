@@ -3,7 +3,6 @@
 namespace Laravie\Profiler\Tests;
 
 use Mockery as m;
-use Monolog\Logger;
 use Illuminate\Log\LogManager;
 use Laravie\Profiler\Contracts\Listener;
 use Laravie\Profiler\Contracts\Profiler;
@@ -11,7 +10,7 @@ use Laravie\Profiler\Contracts\Profiler;
 class ProfilerTest extends TestCase
 {
     /** @test */
-    function can_attach_listener()
+    public function can_attach_listener()
     {
         $listener = m::mock(Listener::class);
 

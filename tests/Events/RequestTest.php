@@ -5,14 +5,13 @@ namespace Laravie\Profiler\Tests\Events;
 use Mockery as m;
 use Illuminate\Log\LogManager;
 use Laravie\Profiler\Events\Request;
-use Illuminate\Support\Facades\Route;
 use Laravie\Profiler\Tests\TestCase;
 use Laravie\Profiler\Contracts\Profiler;
 
 class RequestTest extends TestCase
 {
     /** @test */
-    function log_visit_to_page()
+    public function log_visit_to_page()
     {
         $this->app->instance('log', $logger = m::mock(LogManager::class));
 
