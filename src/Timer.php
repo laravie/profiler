@@ -151,7 +151,7 @@ class Timer implements Contracts\Timer
      */
     public function lapse()
     {
-        $endedAt = \microtime(true);
+        $endedAt = \hrtime(true) / 1E9;
 
         return $endedAt - $this->startedAt;
     }

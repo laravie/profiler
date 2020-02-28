@@ -27,7 +27,7 @@ trait Timing
     {
         $id = isset($this->timers[$name]) ? \uniqid($name) : $name;
 
-        $this->timers[$id] = $this->createTimer($name, \microtime(true), $message);
+        $this->timers[$id] = $this->createTimer($name, (\hrtime(true) / 1E9), $message);
 
         return $this->timers[$id];
     }
