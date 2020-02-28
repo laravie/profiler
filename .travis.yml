@@ -1,5 +1,5 @@
+dist: bionic
 language: php
-dist: xenial
 
 php:
   - 7.2
@@ -12,10 +12,13 @@ env:
   matrix:
     - laravel=^5.8
     - laravel=^6.0
+    - laravel=^7.0
     - setup=stable laravel=^5.8
     - setup=stable laravel=^6.0
+    - setup=stable laravel=^7.0
     - setup=lowest laravel=^5.8
     - setup=lowest laravel=^6.0
+    - setup=lowest laravel=^7.0
 
 before_install:
   - composer config discard-changes true
@@ -35,6 +38,22 @@ after_script:
 
 matrix:
   include:
+    - php: 7.4
+      env: setup=basic laravel=^5.8
+    - php: 7.4
+      env: setup=basic laravel=^6.0
+    - php: 7.4
+      env: setup=basic laravel=^7.0
+    - php: 7.4
+      env: setup=stable laravel=^5.8
+    - php: 7.4
+      env: setup=stable laravel=^6.0
+    - php: 7.4
+      env: setup=stable laravel=^7.0
+    - php: 7.4
+      env: setup=lowest laravel=^6.0
+    - php: 7.4
+      env: setup=lowest laravel=^7.0
     - php: 7.2
       env: setup=coveralls coverage=yes laravel=^5.8
   allow_failures:
