@@ -2,13 +2,22 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/profiler`.
 
+## 3.1.0
+
+Released: 2020-03-01
+
+### Changes
+
+* Add support to Laravel Framework v6.
+* Use `hrtime()` instead of `microtime()`.
+
 ## 3.0.0
 
 Released: 2019-08-28
 
 ### Changes
 
-* Add support to Laravel Framework v6.+.
+* Add support to Laravel Framework v6.
 * Refactor `Laravie\Profiler\Timer`.
 * Improve performance by prefixing all global functions calls with `\` to skip the look up and resolve process and go straight to the global function.
 * return `self` should only be used when method is marked as `final`.
