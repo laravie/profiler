@@ -6,6 +6,8 @@ This changelog references the relevant changes (bug and security fixes) done to 
 
 Released: 2020-03-02
 
+### Changes
+
 * Update `symfony/polyfill-php73` minimum version.
 
 ## 3.1.0
