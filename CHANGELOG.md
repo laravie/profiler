@@ -2,13 +2,19 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `laravie/profiler`.
 
+## 3.1.1
+
+Released: 2020-03-02
+
+* Update `symfony/polyfill-php73` minimum version.
+
 ## 3.1.0
 
 Released: 2020-03-01
 
 ### Changes
 
-* Add support to Laravel Framework v6.
+* Add support to Laravel Framework v7.
 * Use `hrtime()` instead of `microtime()`.
 
 ## 3.0.0
